@@ -11,10 +11,9 @@ artifacts:
   TENSORBOARD_ROOT_LOG_DIR: tensorboard_log_dir
   CALLBACKS_DIR: callbacks
 
-source_download_dirs:
-  - path_to_data_1
-  - path_to_data_1
+source_data_url: https://common-data-001.s3.ap-south-1.amazonaws.com/aiops-class-demo-data/data.xml
 
-local_data_dirs:
-  - path_to_local_data_1
-  - path_to_local_data_2
+source_download_dir:
+  data_dir: data
+  data_file: data.xml
+
