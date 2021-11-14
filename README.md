@@ -1,5 +1,5 @@
-# dvc-project-template
-DVC project template
+# AIOps-project-DVC-NLP-uscase
+DVC project DVC-NLP-uscase
 
 ## STEPS -
 
