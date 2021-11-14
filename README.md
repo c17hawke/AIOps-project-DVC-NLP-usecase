@@ -1,5 +1,5 @@
 # AIOps-project-DVC-NLP-uscase
-DVC project DVC-NLP-uscase
+AIOps project DVC-NLP-uscase
 
 ## STEPS -
 
