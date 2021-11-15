@@ -53,3 +53,24 @@ stages:
       - train.min_split  
     outs:
       - artifacts/model/model.pkl
+
+  evaluate:
+    cmd: python src/stage_05_evaluate.py --config=configs/config.yaml
+    deps:
+      - src/stage_05_evaluate.py
+      - src/utils/common.py
+      - artifacts/features/test.pkl
+      - configs/config.yaml
+      - artifacts/model/model.pkl
+    metrics:
+      - scores.json:
+          cache: false
+    plots:
+      - prc.json:
+          cache: false
+          x: recall
+          y: precision
+      - roc.json:
+          cache: false
+          x: fpr
+          y: tpr
