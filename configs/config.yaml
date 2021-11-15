@@ -5,7 +5,9 @@ artifacts:
   PREPARED_DATA: prepared
   TRAIN_DATA: train.tsv
   TEST_DATA: test.tsv
-
+  FEATURIZED_DATA: features
+  FEATURIZED_TRAIN_DATA: train.pkl
+  FEATURIZED_TEST_DATA: test.pkl
 
 source_data_url: https://common-data-001.s3.ap-south-1.amazonaws.com/aiops-class-demo-data/data.xml
 
