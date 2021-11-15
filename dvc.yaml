@@ -3,8 +3,23 @@ stages:
   get_data:
     cmd: python src/stage_01_get_data.py --config=configs/config.yaml
     deps:
-    - src/stage_01_get_data.py
-    - src/utils/common.py
-    - configs/config.yaml
+      - src/stage_01_get_data.py
+      - src/utils/common.py
+      - configs/config.yaml
     outs:
-    - data/data.xml
+      - data/data.xml
+
+  prepare_data:
+    cmd: python src/stage_02_prepare.py --config=configs/config.yaml --params=params.yaml
+    deps:
+      - src/stage_02_prepare.py
+      - src/utils/common.py
+      - src/utils/data_mgmt.py
+      - data/data.xml
+      - configs/config.yaml
+    params:
+      - prepare.seed
+      - prepare.split  
+    outs:
+      - artifacts/prepared/train.tsv
+      - artifacts/prepared/test.tsv
