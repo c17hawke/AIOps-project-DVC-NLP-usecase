@@ -4,27 +4,51 @@ name: AIOps-DVC-NLP-project
 on: [push]
 
 jobs:
-  run:
+  deploy-runner:
     runs-on: [ubuntu-latest]
     steps:
       - uses: actions/checkout@v2
       - uses: iterative/setup-cml@v1
-      - uses: actions/setup-python@v2
-        with:
-          python-version: '3.7'
-
-      - name: cml-run
-        env: 
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: 'Deploy runner in EC2'
+        shell: bash
+        env:
+          REPO_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
-          # Your ML wokflow commands
+          cml-runner \
+          --cloud aws \
+          --cloud-region us-west \
+          --cloud-type=m \
+          --labels=cml-runner 
+
+  install-requirements:
+    needs: deploy-runner
+    runs-on: [self-hosted, cml-runner]
+    container: docker://iterativeai/cml:0-dvc2-base1
+    steps:
+      - uses: actions/checkout@v2
+      - name: 'prepare environment'
+        env:
+          repo_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+        run: |
           pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install -r requirements.txt          
 
-          dvc repro -v
-
+  model-training:
+    needs: install-requirements
+    runs-on: [self-hosted, cml-runner]
+    container: docker://iterativeai/cml:0-dvc2-base1
+    steps:
+      - uses: actions/checkout@v2
+      - name: 'Train and publish results'
+        env:
+          repo_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+        run: |
+          dvc repro       
           echo "# REPORTS" >> report.md
           echo "## metrics" >> report.md
           cat scores.json >> report.md
+          dvc metrics show >> report.md
 
           cml-send-comment report.md
