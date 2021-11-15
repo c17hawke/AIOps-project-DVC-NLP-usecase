@@ -25,6 +25,6 @@ jobs:
 
           echo "# REPORTS" >> report.md
           echo "## metrics" >> report.md
-          cat score.json >> report.md
+          cat scores.json >> report.md
 
           cml-send-comment report.md
