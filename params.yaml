@@ -1,14 +1,14 @@
 # This contains params to be used by the stages to train or predict
 
 prepare:
-  split: 0.2
+  split: 0.3
   seed: 2021
 
-featurize: 
+featurize:
   max_features: 2500
-  ngrams: 3
+  ngrams: 2
 
 train:
   seed: 2021
-  n_est: 110
-  min_split: 32
+  n_est: 120
+  min_split: 16
