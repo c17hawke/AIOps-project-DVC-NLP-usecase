@@ -22,30 +22,21 @@ jobs:
           --cloud-type=m \
           --labels=cml-runner 
 
-  install-requirements:
+  install-requirements-train:
     needs: deploy-runner
     runs-on: [self-hosted, cml-runner]
     container: docker://iterativeai/cml:0-dvc2-base1
     steps:
       - uses: actions/checkout@v2
-      - name: 'prepare environment'
+      - name: 'prepare environment, train and publish'
         env:
           repo_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         run: |
           pip install --upgrade pip
-          pip install -r requirements.txt          
+          pip install -r requirements.txt
 
-  model-training:
-    needs: install-requirements
-    runs-on: [self-hosted, cml-runner]
-    container: docker://iterativeai/cml:0-dvc2-base1
-    steps:
-      - uses: actions/checkout@v2
-      - name: 'Train and publish results'
-        env:
-          repo_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-        run: |
-          dvc repro       
+          dvc repro         
+
           echo "# REPORTS" >> report.md
           echo "## metrics" >> report.md
           cat scores.json >> report.md
