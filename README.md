@@ -1,6 +1,8 @@
 # AIOps-project-DVC-NLP-uscase
 AIOps project DVC-NLP-uscase
 
+* data is available at - [this googele drive link](https://drive.google.com/file/d/13A0RtvZZanHXKZNbz5JKwjjO2FedNQCR/view?usp=sharing)
+
 ## Important References - 
 
 * [Bag of Words- Krish Naik](https://youtu.be/D2V1okCEsiE)
