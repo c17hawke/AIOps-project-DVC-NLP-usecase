@@ -1,5 +1,7 @@
-# AIOps-project-DVC-NLP-uscase
-AIOps project DVC-NLP-uscase
+<!-- # AIOps-project-DVC-NLP-uscase
+AIOps project DVC-NLP-uscase -->
+
+![AIOps-project-DVC-NLP-usecase](https://socialify.git.ci/c17hawke/AIOps-project-DVC-NLP-usecase/image?forks=1&issues=1&language=1&name=1&owner=1&pattern=Circuit%20Board&pulls=1&stargazers=1&theme=Dark)
 
 * data is available at - [this googele drive link](https://drive.google.com/file/d/13A0RtvZZanHXKZNbz5JKwjjO2FedNQCR/view?usp=sharing)
 
